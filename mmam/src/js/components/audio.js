@@ -1,3 +1,5 @@
+import { timeCodeData, timeStampTitle } from '../constants/timecodeData';
+
 class Audio {
   constructor(audio) {
     this.audio = audio;
@@ -5,27 +7,22 @@ class Audio {
     this.secondsHTML = document.querySelector('.timer__seconds');
     this.currentMinutesHTML = document.querySelector('.timer__current-minutes');
     this.currentSecondsHTML = document.querySelector('.timer__current-seconds');
+    this.timeStampTitle = document.querySelector('.timestamps__title');
     this.playBtn = document.querySelector('.dashboard__play-btn');
     this.dashboard = document.querySelector('.dashboard');
     this.dashboardPannel = document.querySelector('.dashboard__pannel');
     this.timeStampsArray = Array.from(document.querySelectorAll('.timestamp-item'));
+    this.timeStampTitle.innerHTML = timeStampTitle;
     const { duration } = this.audio;
     this.duration = duration;
     this.isPlaying = false;
     this.minutes = 0;
     this.seconds = 0;
-
     this.currentMinutes = 0;
     this.currentSeconds = 0;
     this.interval = null;
     this.currentTime = this.audio.currentTime;
     this.setInitialTimer();
-    // this.audio.addEventListener('loadedmetadata', () => {
-    //   console.log('====================================');
-    //   console.log('loadedmetadata');
-    //   console.log('====================================');
-    //   this.setInitialTimer();
-    // });
   }
 
   toggleEqualizer() {
@@ -48,9 +45,24 @@ class Audio {
   setCustomTimer() {
     this.currentMinutes = Math.floor(this.audio.currentTime / 60);
     this.currentSeconds = Math.floor(this.audio.currentTime % 60);
-    console.log('====================================');
-    console.log(this.audio.currentTime, this.currentMinutes, this.currentSeconds);
-    console.log('====================================');
+  }
+
+  removeActiveTimestamp() {
+    this.timeStampsArray.forEach((timestamp) => {
+      if (timestamp.classList.contains('_active')) timestamp.classList.remove('_active');
+    });
+  }
+
+  setActiveTimestamp() {
+    this.timeStampsArray.forEach((timestamp, i) => {
+      const { timecodeStart, timecodeFinish, title } = timeCodeData[i];
+      if (this.audio.currentTime >= timecodeStart && this.audio.currentTime < timecodeFinish) {
+        timestamp.classList.add('_active');
+        this.timeStampTitle.innerHTML = title;
+      } else {
+        timestamp.classList.remove('_active');
+      }
+    });
   }
 
   setTimer() {
@@ -69,6 +81,7 @@ class Audio {
       this.currentSecondsHTML.innerHTML = this.currentSeconds >= 10 ? this.currentSeconds : `0${this.currentSeconds}`;
       this.currentMinutesHTML.innerHTML = this.currentMinutes >= 10 ? this.currentMinutes : `0${this.currentMinutes}`;
       this.setDashboardStyles();
+      this.setActiveTimestamp();
     }, 1000);
   }
 
@@ -83,6 +96,7 @@ class Audio {
     clearInterval(this.interval);
     this.setTimer();
     this.audio.play();
+
     this.toggleEqualizer();
     this.setDashboardStyles();
   }
@@ -103,9 +117,12 @@ class Audio {
     this.audio.pause();
     clearInterval(this.interval);
     this.toggleEqualizer();
+
     this.currentTime = 0;
     this.audio.currentTime = 0;
     this.setDashboardStyles();
+    this.removeActiveTimestamp();
+    this.timeStampTitle.innerHTML = timeStampTitle;
   }
 
   init() {
@@ -123,11 +140,12 @@ class Audio {
       this.setCustomTimer();
       this.playAudio();
     });
+
     this.timeStampsArray.forEach((timeStamp) => {
       timeStamp.addEventListener('click', () => {
         const { time } = timeStamp.dataset;
         this.audio.currentTime = Number(time);
-
+        this.setActiveTimestamp();
         this.setCustomTimer();
         this.playAudio();
       });

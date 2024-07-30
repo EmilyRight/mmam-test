@@ -102,7 +102,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: .2rem;
+      gap: 0.2rem;
       max-width: 2.6rem;
       .equalizer__line {
         background-color: #65707b;
@@ -167,6 +167,9 @@
     &__title {
       font-size: 1.6rem;
       line-height: 2.2rem;
+      margin-bottom: 1.8rem;
+      min-height: 4.4rem;
+
     }
 
     &__list {
@@ -182,10 +185,13 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      // border-left: 2px solid #3fcbff;
       cursor: pointer;
-      max-width: 50%;
+      max-width: 70%;
       transition: 0.4s;
+      &._active {
+        font-weight: 700;
+        
+      }
       &::before {
         content: "";
         position: absolute;
@@ -193,6 +199,7 @@
         height: 100%;
         background-color: #3fcbff;
         left: 0rem;
+        transition: 0.4s;
       }
       &:hover {
         &::before {
@@ -206,16 +213,7 @@
       }
     }
   }
-  .item {
-    &__timer {
-    }
 
-    &__title {
-    }
-
-    &__description {
-    }
-  }
   .player-image {
     position: absolute;
     &_desktop {
