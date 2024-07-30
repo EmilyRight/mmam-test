@@ -125,6 +125,7 @@
       .dashboard__play-btn {
         background-image: url("../img/icons/pause.png");
       }
+
       .equalizer {
         &__line:nth-child(1) {
           animation: line1 1.5s linear 0s infinite normal both;
@@ -169,7 +170,8 @@
       line-height: 2.2rem;
       margin-bottom: 1.8rem;
       min-height: 4.4rem;
-
+      border-bottom: 1px dotted #999;
+      padding-bottom: 0.5rem;
     }
 
     &__list {
@@ -187,10 +189,20 @@
       position: relative;
       cursor: pointer;
       max-width: 70%;
+      color: #555;
       transition: 0.4s;
       &._active {
-        font-weight: 700;
-        
+        .item__timer {
+          font-weight: 700;
+          color: #999;
+        }
+        .item__title {
+          font-weight: 700;
+          color: #000;
+        }
+        .item__description {
+          color: #000;
+        }
       }
       &::before {
         content: "";
