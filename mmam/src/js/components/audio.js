@@ -13,8 +13,9 @@ class Audio {
     this.dashboardPannel = document.querySelector('.dashboard__pannel');
     this.timeStampsArray = Array.from(document.querySelectorAll('.timestamp-item'));
     this.timeStampTitle.innerHTML = timeStampTitle;
-    const { duration } = this.audio;
-    this.duration = duration;
+    // const { duration } = this.audio;
+    // this.duration = this.audio.duration;
+    // this.setInitialTimer();
     this.isPlaying = false;
     this.minutes = 0;
     this.seconds = 0;
@@ -22,7 +23,10 @@ class Audio {
     this.currentSeconds = 0;
     this.interval = null;
     this.currentTime = this.audio.currentTime;
-    this.setInitialTimer();
+    this.audio.addEventListener('loadedmetadata', () => {
+      this.duration = this.audio.duration;
+      this.setInitialTimer();
+    });
   }
 
   toggleEqualizer() {

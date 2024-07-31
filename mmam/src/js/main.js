@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('load', () => {
   const audioItem = document.querySelector('#audio');
-  const audio = new Audio(audioItem);
-  audio.init();
+  audioItem.load();
+  const audioInstance = new Audio(audioItem);
+  audioInstance.init();
 });
 
 function goNextSection() {

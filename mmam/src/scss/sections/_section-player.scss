@@ -25,7 +25,6 @@
   }
   .player {
     background-color: #ffffff66;
-    // border: 2px solid #e73a3a1a;
     box-shadow: 0px 2px 1px 0px #ffffff59 inset;
     box-shadow: 0px -2px 0px 0px #ffffff4d inset;
     box-shadow: 0px 5px 20px 0px #0000001a;
@@ -37,11 +36,6 @@
     padding: 2rem 2.4rem;
     @media (min-width: $mobile) {
       width: 49%;
-    }
-    &__dashboard {
-    }
-
-    &__timestamps {
     }
   }
   .dashboard {
@@ -83,6 +77,7 @@
       cursor: pointer;
       border: none;
       outline: none;
+      appearance: none;
       -webkit-appearance: none;
     }
 
@@ -145,23 +140,12 @@
       }
     }
   }
-  .pannel {
-    &__inner {
-    }
-  }
+
   .timer {
     display: flex;
     &__item {
       width: 7rem;
       text-align: center;
-    }
-    &__hours {
-    }
-
-    &__minutes {
-    }
-
-    &__seconds {
     }
   }
   .timestamps {
