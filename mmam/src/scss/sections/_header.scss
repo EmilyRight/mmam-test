@@ -1,0 +1,58 @@
+.header {
+  background-color: #000;
+  position: relative;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  width: 100%;
+  z-index: 20;
+  @media (min-width: $mobile-small) {
+    padding-bottom: 0.6rem;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+
+  &__logo {
+    max-width: 19rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    @media (min-width: $mobile-small) {
+      // max-width: 6rem;
+    }
+
+    span {
+      position: relative;
+      width: 3rem;
+      height: .2rem;
+      background-color: #000000;
+      transform: rotate(45deg);
+      &::after {
+        content: "";
+        position: absolute;
+        width: 3rem;
+        height: .2rem;
+        background-color: #000000;
+        transform: rotate(90deg);
+      }
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 2.4rem;
+    position: static;
+  }
+
+}

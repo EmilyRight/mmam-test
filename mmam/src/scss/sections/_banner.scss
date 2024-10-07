@@ -1,0 +1,21 @@
+.banner {
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+  @media (min-width: $mobile-small) {
+    padding-bottom: 3.2rem;
+  }
+  &__container {
+  }
+
+  &__text {
+    padding: 2.4rem;
+    box-shadow: 0px 2px 1px 0px #ffffff59 inset,
+      0px -2px 0px 0px #ffffff4d inset, 0px 5px 20px 0px #0000001a;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    border-radius: 1.6rem;
+    @media (min-width: $mobile-small) {
+      border-radius: 1.8rem;
+    }
+  }
+}
